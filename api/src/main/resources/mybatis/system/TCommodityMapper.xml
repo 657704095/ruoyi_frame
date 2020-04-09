@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
         <result property="img"    column="img"    />
+        <result property="imgMax"    column="img_max"    />
         <result property="intro"    column="intro"    />
         <result property="price"    column="price"    />
         <result property="html"    column="html"    />
@@ -23,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTCommodityVo">
-        select id, `name`, img, intro, price, html, Art_No, tag, sales_volume, `order`, add_date, add_id, modify_id, `language`, modification_time from t_commodity
+        select id, `name`, img,img_max, intro, price, html, Art_No, tag, sales_volume, `order`, add_date, add_id, modify_id, `language`, modification_time from t_commodity
     </sql>
 
     <select id="selectTCommodityList" parameterType="TCommodity" resultMap="TCommodityResult">
@@ -31,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="imgMax != null  and imgMax != ''"> and img_max = #{imgMax}</if>
             <if test="intro != null  and intro != ''"> and intro = #{intro}</if>
             <if test="price != null "> and price = #{price}</if>
             <if test="html != null  and html != ''"> and html = #{html}</if>
@@ -56,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null  and name != ''">`name`,</if>
             <if test="img != null  and img != ''">img,</if>
+            <if test="imgMax != null  and imgMax != ''">img_max,</if>
             <if test="intro != null  and intro != ''">intro,</if>
             <if test="price != null ">price,</if>
             <if test="html != null  and html != ''">html,</if>
@@ -72,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null  and name != ''">#{name},</if>
             <if test="img != null  and img != ''">#{img},</if>
+            <if test="imgMax != null  and imgMax != ''">#{imgMax},</if>
             <if test="intro != null  and intro != ''">#{intro},</if>
             <if test="price != null ">#{price},</if>
             <if test="html != null  and html != ''">#{html},</if>

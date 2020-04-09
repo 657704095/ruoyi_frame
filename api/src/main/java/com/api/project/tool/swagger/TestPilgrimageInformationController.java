@@ -34,7 +34,7 @@ public class TestPilgrimageInformationController extends BaseController
      * 查询信息管理列表
      */
     @ApiOperation("查询信息管理列表")
-    @PreAuthorize("@ss.hasPermi('system:information:list')")
+    //@PreAuthorize("@ss.hasPermi('system:information:list')")
     @GetMapping("/list")
     public TableDataInfo list(TPilgrimageInformation tPilgrimageInformation)
     {
@@ -84,7 +84,7 @@ public class TestPilgrimageInformationController extends BaseController
      * 修改信息管理
      */
     @ApiOperation("修改信息管理")
-    //@PreAuthorize("@ss.hasPermi('system:information:edit')")
+    @PreAuthorize("@ss.hasPermi('system:information:edit')")
     @Log(title = "信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TPilgrimageInformation tPilgrimageInformation)
@@ -96,7 +96,7 @@ public class TestPilgrimageInformationController extends BaseController
      * 删除信息管理
      */
     @ApiOperation("删除信息管理")
-    //@PreAuthorize("@ss.hasPermi('system:information:remove')")
+    @PreAuthorize("@ss.hasPermi('system:information:remove')")
     @Log(title = "信息管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

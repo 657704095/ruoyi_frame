@@ -28,6 +28,10 @@ public class TCommodity extends BaseEntity
     @Excel(name = "图片url")
     private String img;
 
+    /** 图片视频url */
+    @Excel(name = "大图片视频url")
+    private String imgMax;
+
     /** 简介 */
     @Excel(name = "简介")
     private String intro;
@@ -76,7 +80,15 @@ public class TCommodity extends BaseEntity
     @Excel(name = "语言", width = 30, dateFormat = "yyyy-MM-dd")
     private Date modificationTime;
 
-    public void setId(Long id) 
+    public String getImgMax() {
+        return imgMax;
+    }
+
+    public void setImgMax(String imgMax) {
+        this.imgMax = imgMax;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }

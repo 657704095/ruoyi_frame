@@ -28,6 +28,10 @@ public class TPilgrimageInformation extends BaseEntity
     @Excel(name = "图片视频url")
     private String img;
 
+    /** 图片视频url */
+    @Excel(name = "大图片视频url")
+    private String imgMax;
+
     /** 简介 */
     @Excel(name = "简介")
     private String intro;
@@ -68,7 +72,15 @@ public class TPilgrimageInformation extends BaseEntity
     @Excel(name = "1轮播图，2朝圣信息3朝圣视频4朝圣学院5定制朝圣6朝圣慈善7签证类容8法律法规9注意事项10朝圣景点11线路管理")
     private Long tableType;
 
-    public void setId(Long id) 
+    public String getImgMax() {
+        return imgMax;
+    }
+
+    public void setImgMax(String imgMax) {
+        this.imgMax = imgMax;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
@@ -205,3 +217,4 @@ public class TPilgrimageInformation extends BaseEntity
             .toString();
     }
 }
+
