@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTPilgrimageCircleVo">
-        select id, user_id, user_head_portrait, user_name, audit, img, post_message, add_id, type, language, modify_id, modification_time, add_time from t_pilgrimage_circle
+        select id, user_id, user_head_portrait, user_name, audit, img, post_message, add_id, `type`, `language`, modify_id, modification_time, add_time from t_pilgrimage_circle
     </sql>
 
     <select id="selectTPilgrimageCircleList" parameterType="TPilgrimageCircle" resultMap="TPilgrimageCircleResult">
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="postMessage != null  and postMessage != ''"> and post_message = #{postMessage}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
             <if test="type != null "> and type = #{type}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
             <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
@@ -57,8 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="img != null  and img != ''">img,</if>
             <if test="postMessage != null  and postMessage != ''">post_message,</if>
             <if test="addId != null ">add_id,</if>
-            <if test="type != null ">type,</if>
-            <if test="language != null ">language,</if>
+            <if test="type != null ">`type`,</if>
+            <if test="language != null ">`language`,</if>
             <if test="modifyId != null ">modify_id,</if>
             <if test="modificationTime != null ">modification_time,</if>
             <if test="addTime != null ">add_time,</if>
@@ -89,8 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="img != null  and img != ''">img = #{img},</if>
             <if test="postMessage != null  and postMessage != ''">post_message = #{postMessage},</if>
             <if test="addId != null ">add_id = #{addId},</if>
-            <if test="type != null ">type = #{type},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="type != null ">`type` = #{type},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
             <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
             <if test="addTime != null ">add_time = #{addTime},</if>

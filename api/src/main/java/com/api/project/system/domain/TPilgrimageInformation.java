@@ -158,21 +158,21 @@ public class TPilgrimageInformation extends BaseEntity
     {
         return modifyId;
     }
-    public void setModificationTime(Date modificationTime) 
+    public void setModificationTime(Date modificationTime)
     {
         this.modificationTime = modificationTime;
     }
 
-    public Date getModificationTime() 
+    public Date getModificationTime()
     {
         return modificationTime;
     }
-    public void setAddTime(Date addTime) 
+    public void setAddTime(Date addTime)
     {
         this.addTime = addTime;
     }
 
-    public Date getAddTime() 
+    public Date getAddTime()
     {
         return addTime;
     }

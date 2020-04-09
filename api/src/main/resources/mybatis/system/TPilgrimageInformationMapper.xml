@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTPilgrimageInformationVo">
-        select id, title, img, intro, html, price, add_id, order, language, modify_id, modification_time, add_time, table_type from t_pilgrimage_information
+        select id, title, img, intro, html, price, add_id, `order`, `language`, modify_id, modification_time, add_time, table_type from t_pilgrimage_information
     </sql>
 
     <select id="selectTPilgrimageInformationList" parameterType="TPilgrimageInformation" resultMap="TPilgrimageInformationResult">
@@ -33,8 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="html != null  and html != ''"> and html = #{html}</if>
             <if test="price != null "> and price = #{price}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
-            <if test="order != null "> and order = #{order}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="order != null "> and `order` = #{order}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
             <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
@@ -56,8 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="html != null  and html != ''">html,</if>
             <if test="price != null ">price,</if>
             <if test="addId != null ">add_id,</if>
-            <if test="order != null ">order,</if>
-            <if test="language != null ">language,</if>
+            <if test="order != null ">`order`,</if>
+            <if test="language != null ">`language`,</if>
             <if test="modifyId != null ">modify_id,</if>
             <if test="modificationTime != null ">modification_time,</if>
             <if test="addTime != null ">add_time,</if>
@@ -88,8 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="html != null  and html != ''">html = #{html},</if>
             <if test="price != null ">price = #{price},</if>
             <if test="addId != null ">add_id = #{addId},</if>
-            <if test="order != null ">order = #{order},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="order != null ">`order` = #{order},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
             <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
             <if test="addTime != null ">add_time = #{addTime},</if>

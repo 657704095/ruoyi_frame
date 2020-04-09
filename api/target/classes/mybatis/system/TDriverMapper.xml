@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTDriverVo">
-        select id, name, gender, tel, group_id, language, add_id, modify_id, license_plate_number, modification_time, add_time from t_driver
+        select id, `name`, gender, tel, group_id, `language`, add_id, modify_id, license_plate_number, modification_time, add_time from t_driver
     </sql>
 
     <select id="selectTDriverList" parameterType="TDriver" resultMap="TDriverResult">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
             <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
             <if test="groupId != null "> and group_id = #{groupId}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
             <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number = #{licensePlateNumber}</if>
@@ -46,11 +46,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertTDriver" parameterType="TDriver" useGeneratedKeys="true" keyProperty="id">
         insert into t_driver
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="name != null  and name != ''">name,</if>
+            <if test="name != null  and name != ''">`name`,</if>
             <if test="gender != null  and gender != ''">gender,</if>
             <if test="tel != null  and tel != ''">tel,</if>
             <if test="groupId != null ">group_id,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
             <if test="addId != null ">add_id,</if>
             <if test="modifyId != null ">modify_id,</if>
             <if test="licensePlateNumber != null  and licensePlateNumber != ''">license_plate_number,</if>
@@ -74,11 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateTDriver" parameterType="TDriver">
         update t_driver
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="name != null  and name != ''">`name` = #{name},</if>
             <if test="gender != null  and gender != ''">gender = #{gender},</if>
             <if test="tel != null  and tel != ''">tel = #{tel},</if>
             <if test="groupId != null ">group_id = #{groupId},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="addId != null ">add_id = #{addId},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
             <if test="licensePlateNumber != null  and licensePlateNumber != ''">license_plate_number = #{licensePlateNumber},</if>

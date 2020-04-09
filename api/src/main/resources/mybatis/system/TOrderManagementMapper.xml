@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTOrderManagementVo">
-        select id, order_number, submit_event, order_price, waybill_price, logistics_number, user_id, harvest_address_province, harvest_address_city, harvest_address_county, harvest_address_street_or_town, order_state, shipping_status, mode_payment, language, modification_time, add_time from t_order_management
+        select id, order_number, submit_event, order_price, waybill_price, logistics_number, user_id, harvest_address_province, harvest_address_city, harvest_address_county, harvest_address_street_or_town, order_state, shipping_status, mode_payment, `language`, modification_time, add_time from t_order_management
     </sql>
 
     <select id="selectTOrderManagementList" parameterType="TOrderManagement" resultMap="TOrderManagementResult">
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null "> and order_state = #{orderState}</if>
             <if test="shippingStatus != null "> and shipping_status = #{shippingStatus}</if>
             <if test="modePayment != null "> and mode_payment = #{modePayment}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
         </where>
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null ">order_state,</if>
             <if test="shippingStatus != null ">shipping_status,</if>
             <if test="modePayment != null ">mode_payment,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
             <if test="modificationTime != null ">modification_time,</if>
             <if test="addTime != null ">add_time,</if>
          </trim>
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderState != null ">order_state = #{orderState},</if>
             <if test="shippingStatus != null ">shipping_status = #{shippingStatus},</if>
             <if test="modePayment != null ">mode_payment = #{modePayment},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
             <if test="addTime != null ">add_time = #{addTime},</if>
         </trim>

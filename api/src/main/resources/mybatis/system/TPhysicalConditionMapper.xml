@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTPhysicalConditionVo">
-        select id, name, modification_time, add_time, modify_id, add_id, language from t_physical_condition
+        select id, name, modification_time, add_time, modify_id, add_id, `language` from t_physical_condition
     </sql>
 
     <select id="selectTPhysicalConditionList" parameterType="TPhysicalCondition" resultMap="TPhysicalConditionResult">
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null "> and add_time = #{addTime}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
         </where>
     </select>
     
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null ">add_time,</if>
             <if test="modifyId != null ">modify_id,</if>
             <if test="addId != null ">add_id,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null  and name != ''">#{name},</if>
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null ">add_time = #{addTime},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
             <if test="addId != null ">add_id = #{addId},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
         </trim>
         where id = #{id}
     </update>

@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTOutreachWorkersVo">
-        select id, outreach_id, group_name, beign_time, end_time, type, apply_type, add_id, modify_id, language, modification_time, add_time from t_outreach_workers
+        select id, outreach_id, group_name, beign_time, end_time, `type`, apply_type, add_id, modify_id, `language`, modification_time, add_time from t_outreach_workers
     </sql>
 
     <select id="selectTOutreachWorkersList" parameterType="TOutreachWorkers" resultMap="TOutreachWorkersResult">
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="applyType != null "> and apply_type = #{applyType}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
         </where>
@@ -52,11 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="groupName != null  and groupName != ''">group_name,</if>
             <if test="beignTime != null ">beign_time,</if>
             <if test="endTime != null ">end_time,</if>
-            <if test="type != null ">type,</if>
+            <if test="type != null ">`type`,</if>
             <if test="applyType != null ">apply_type,</if>
             <if test="addId != null ">add_id,</if>
             <if test="modifyId != null ">modify_id,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
             <if test="modificationTime != null ">modification_time,</if>
             <if test="addTime != null ">add_time,</if>
          </trim>
@@ -82,11 +82,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="groupName != null  and groupName != ''">group_name = #{groupName},</if>
             <if test="beignTime != null ">beign_time = #{beignTime},</if>
             <if test="endTime != null ">end_time = #{endTime},</if>
-            <if test="type != null ">type = #{type},</if>
+            <if test="type != null ">`type` = #{type},</if>
             <if test="applyType != null ">apply_type = #{applyType},</if>
             <if test="addId != null ">add_id = #{addId},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
             <if test="addTime != null ">add_time = #{addTime},</if>
         </trim>

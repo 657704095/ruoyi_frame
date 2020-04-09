@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTRegistrationListVo">
-        select id, user_id, user_name, user_tel, line_name, modification_time, price, id_card, add_id, modify_id, language, registration_time, add_time from t_registration_list
+        select id, user_id, user_name, user_tel, line_name, modification_time, price, id_card, add_id, modify_id, `language`, registration_time, add_time from t_registration_list
     </sql>
 
     <select id="selectTRegistrationListList" parameterType="TRegistrationList" resultMap="TRegistrationListResult">
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
             <if test="registrationTime != null "> and registration_time = #{registrationTime}</if>
             <if test="addTime != null "> and add_time = #{addTime}</if>
         </where>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''">id_card,</if>
             <if test="addId != null ">add_id,</if>
             <if test="modifyId != null ">modify_id,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
             <if test="registrationTime != null ">registration_time,</if>
             <if test="addTime != null ">add_time,</if>
          </trim>
@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''">id_card = #{idCard},</if>
             <if test="addId != null ">add_id = #{addId},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
             <if test="registrationTime != null ">registration_time = #{registrationTime},</if>
             <if test="addTime != null ">add_time = #{addTime},</if>
         </trim>

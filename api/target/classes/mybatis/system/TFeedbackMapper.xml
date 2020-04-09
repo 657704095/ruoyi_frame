@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTFeedbackVo">
-        select id, feedback_time, content, modification_time, add_time, add_id, modify_id, language from t_feedback
+        select id, feedback_time, content, modification_time, add_time, add_id, modify_id, `language` from t_feedback
     </sql>
 
     <select id="selectTFeedbackList" parameterType="TFeedback" resultMap="TFeedbackResult">
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null "> and add_time = #{addTime}</if>
             <if test="addId != null "> and add_id = #{addId}</if>
             <if test="modifyId != null "> and modify_id = #{modifyId}</if>
-            <if test="language != null "> and language = #{language}</if>
+            <if test="language != null "> and `language` = #{language}</if>
         </where>
     </select>
     
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null ">add_time,</if>
             <if test="addId != null ">add_id,</if>
             <if test="modifyId != null ">modify_id,</if>
-            <if test="language != null ">language,</if>
+            <if test="language != null ">`language`,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="feedbackTime != null ">#{feedbackTime},</if>
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="addTime != null ">add_time = #{addTime},</if>
             <if test="addId != null ">add_id = #{addId},</if>
             <if test="modifyId != null ">modify_id = #{modifyId},</if>
-            <if test="language != null ">language = #{language},</if>
+            <if test="language != null ">`language` = #{language},</if>
         </trim>
         where id = #{id}
     </update>
