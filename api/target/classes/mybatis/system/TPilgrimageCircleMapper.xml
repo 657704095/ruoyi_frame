@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TPilgrimageCircleMapper">
+    
+    <resultMap type="TPilgrimageCircle" id="TPilgrimageCircleResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userHeadPortrait"    column="user_head_portrait"    />
+        <result property="userName"    column="user_name"    />
+        <result property="audit"    column="audit"    />
+        <result property="img"    column="img"    />
+        <result property="postMessage"    column="post_message"    />
+        <result property="addId"    column="add_id"    />
+        <result property="type"    column="type"    />
+        <result property="language"    column="language"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTPilgrimageCircleVo">
+        select id, user_id, user_head_portrait, user_name, audit, img, post_message, add_id, type, language, modify_id, modification_time, add_time from t_pilgrimage_circle
+    </sql>
+
+    <select id="selectTPilgrimageCircleList" parameterType="TPilgrimageCircle" resultMap="TPilgrimageCircleResult">
+        <include refid="selectTPilgrimageCircleVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userHeadPortrait != null  and userHeadPortrait != ''"> and user_head_portrait = #{userHeadPortrait}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="audit != null "> and audit = #{audit}</if>
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="postMessage != null  and postMessage != ''"> and post_message = #{postMessage}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPilgrimageCircleById" parameterType="Long" resultMap="TPilgrimageCircleResult">
+        <include refid="selectTPilgrimageCircleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTPilgrimageCircle" parameterType="TPilgrimageCircle" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pilgrimage_circle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userHeadPortrait != null  and userHeadPortrait != ''">user_head_portrait,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="audit != null ">audit,</if>
+            <if test="img != null  and img != ''">img,</if>
+            <if test="postMessage != null  and postMessage != ''">post_message,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="type != null ">type,</if>
+            <if test="language != null ">language,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userHeadPortrait != null  and userHeadPortrait != ''">#{userHeadPortrait},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="audit != null ">#{audit},</if>
+            <if test="img != null  and img != ''">#{img},</if>
+            <if test="postMessage != null  and postMessage != ''">#{postMessage},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPilgrimageCircle" parameterType="TPilgrimageCircle">
+        update t_pilgrimage_circle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userHeadPortrait != null  and userHeadPortrait != ''">user_head_portrait = #{userHeadPortrait},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="audit != null ">audit = #{audit},</if>
+            <if test="img != null  and img != ''">img = #{img},</if>
+            <if test="postMessage != null  and postMessage != ''">post_message = #{postMessage},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPilgrimageCircleById" parameterType="Long">
+        delete from t_pilgrimage_circle where id = #{id}
+    </delete>
+
+    <delete id="deleteTPilgrimageCircleByIds" parameterType="String">
+        delete from t_pilgrimage_circle where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

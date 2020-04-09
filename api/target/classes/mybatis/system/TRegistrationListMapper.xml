@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TRegistrationListMapper">
+    
+    <resultMap type="TRegistrationList" id="TRegistrationListResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="userTel"    column="user_tel"    />
+        <result property="lineName"    column="line_name"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="price"    column="price"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="addId"    column="add_id"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="language"    column="language"    />
+        <result property="registrationTime"    column="registration_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTRegistrationListVo">
+        select id, user_id, user_name, user_tel, line_name, modification_time, price, id_card, add_id, modify_id, language, registration_time, add_time from t_registration_list
+    </sql>
+
+    <select id="selectTRegistrationListList" parameterType="TRegistrationList" resultMap="TRegistrationListResult">
+        <include refid="selectTRegistrationListVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="userTel != null  and userTel != ''"> and user_tel = #{userTel}</if>
+            <if test="lineName != null  and lineName != ''"> and line_name like concat('%', #{lineName}, '%')</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="registrationTime != null "> and registration_time = #{registrationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTRegistrationListById" parameterType="Long" resultMap="TRegistrationListResult">
+        <include refid="selectTRegistrationListVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTRegistrationList" parameterType="TRegistrationList" useGeneratedKeys="true" keyProperty="id">
+        insert into t_registration_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="userTel != null  and userTel != ''">user_tel,</if>
+            <if test="lineName != null  and lineName != ''">line_name,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="price != null ">price,</if>
+            <if test="idCard != null  and idCard != ''">id_card,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="language != null ">language,</if>
+            <if test="registrationTime != null ">registration_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="userTel != null  and userTel != ''">#{userTel},</if>
+            <if test="lineName != null  and lineName != ''">#{lineName},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="price != null ">#{price},</if>
+            <if test="idCard != null  and idCard != ''">#{idCard},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="registrationTime != null ">#{registrationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTRegistrationList" parameterType="TRegistrationList">
+        update t_registration_list
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="userTel != null  and userTel != ''">user_tel = #{userTel},</if>
+            <if test="lineName != null  and lineName != ''">line_name = #{lineName},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="price != null ">price = #{price},</if>
+            <if test="idCard != null  and idCard != ''">id_card = #{idCard},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="registrationTime != null ">registration_time = #{registrationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTRegistrationListById" parameterType="Long">
+        delete from t_registration_list where id = #{id}
+    </delete>
+
+    <delete id="deleteTRegistrationListByIds" parameterType="String">
+        delete from t_registration_list where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

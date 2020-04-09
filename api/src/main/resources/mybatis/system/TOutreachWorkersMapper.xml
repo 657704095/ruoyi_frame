@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TOutreachWorkersMapper">
+    
+    <resultMap type="TOutreachWorkers" id="TOutreachWorkersResult">
+        <result property="id"    column="id"    />
+        <result property="outreachId"    column="outreach_id"    />
+        <result property="groupName"    column="group_name"    />
+        <result property="beignTime"    column="beign_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="type"    column="type"    />
+        <result property="applyType"    column="apply_type"    />
+        <result property="addId"    column="add_id"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="language"    column="language"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTOutreachWorkersVo">
+        select id, outreach_id, group_name, beign_time, end_time, type, apply_type, add_id, modify_id, language, modification_time, add_time from t_outreach_workers
+    </sql>
+
+    <select id="selectTOutreachWorkersList" parameterType="TOutreachWorkers" resultMap="TOutreachWorkersResult">
+        <include refid="selectTOutreachWorkersVo"/>
+        <where>  
+            <if test="outreachId != null "> and outreach_id = #{outreachId}</if>
+            <if test="groupName != null  and groupName != ''"> and group_name like concat('%', #{groupName}, '%')</if>
+            <if test="beignTime != null "> and beign_time = #{beignTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="applyType != null "> and apply_type = #{applyType}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTOutreachWorkersById" parameterType="Long" resultMap="TOutreachWorkersResult">
+        <include refid="selectTOutreachWorkersVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTOutreachWorkers" parameterType="TOutreachWorkers" useGeneratedKeys="true" keyProperty="id">
+        insert into t_outreach_workers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="outreachId != null ">outreach_id,</if>
+            <if test="groupName != null  and groupName != ''">group_name,</if>
+            <if test="beignTime != null ">beign_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="type != null ">type,</if>
+            <if test="applyType != null ">apply_type,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="language != null ">language,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="outreachId != null ">#{outreachId},</if>
+            <if test="groupName != null  and groupName != ''">#{groupName},</if>
+            <if test="beignTime != null ">#{beignTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="applyType != null ">#{applyType},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTOutreachWorkers" parameterType="TOutreachWorkers">
+        update t_outreach_workers
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="outreachId != null ">outreach_id = #{outreachId},</if>
+            <if test="groupName != null  and groupName != ''">group_name = #{groupName},</if>
+            <if test="beignTime != null ">beign_time = #{beignTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="applyType != null ">apply_type = #{applyType},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTOutreachWorkersById" parameterType="Long">
+        delete from t_outreach_workers where id = #{id}
+    </delete>
+
+    <delete id="deleteTOutreachWorkersByIds" parameterType="String">
+        delete from t_outreach_workers where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

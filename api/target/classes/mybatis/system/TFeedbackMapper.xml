@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TFeedbackMapper">
+    
+    <resultMap type="TFeedback" id="TFeedbackResult">
+        <result property="id"    column="id"    />
+        <result property="feedbackTime"    column="feedback_time"    />
+        <result property="content"    column="content"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+        <result property="addId"    column="add_id"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="language"    column="language"    />
+    </resultMap>
+
+    <sql id="selectTFeedbackVo">
+        select id, feedback_time, content, modification_time, add_time, add_id, modify_id, language from t_feedback
+    </sql>
+
+    <select id="selectTFeedbackList" parameterType="TFeedback" resultMap="TFeedbackResult">
+        <include refid="selectTFeedbackVo"/>
+        <where>  
+            <if test="feedbackTime != null "> and feedback_time = #{feedbackTime}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="language != null "> and language = #{language}</if>
+        </where>
+    </select>
+    
+    <select id="selectTFeedbackById" parameterType="Long" resultMap="TFeedbackResult">
+        <include refid="selectTFeedbackVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTFeedback" parameterType="TFeedback" useGeneratedKeys="true" keyProperty="id">
+        insert into t_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feedbackTime != null ">feedback_time,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="language != null ">language,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feedbackTime != null ">#{feedbackTime},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="language != null ">#{language},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTFeedback" parameterType="TFeedback">
+        update t_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feedbackTime != null ">feedback_time = #{feedbackTime},</if>
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="language != null ">language = #{language},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTFeedbackById" parameterType="Long">
+        delete from t_feedback where id = #{id}
+    </delete>
+
+    <delete id="deleteTFeedbackByIds" parameterType="String">
+        delete from t_feedback where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

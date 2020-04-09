@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TGroupMembersMapper">
+    
+    <resultMap type="TGroupMembers" id="TGroupMembersResult">
+        <result property="id"    column="id"    />
+        <result property="groupId"    column="group_id"    />
+        <result property="user"    column="user"    />
+        <result property="userName"    column="user_name"    />
+        <result property="tel"    column="tel"    />
+        <result property="visaStatus"    column="visa_status"    />
+        <result property="gender"    column="gender"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="physicalConditionId"    column="physical_condition_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="addId"    column="add_id"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="language"    column="language"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTGroupMembersVo">
+        select id, group_id, user, user_name, tel, visa_status, gender, birthday, physical_condition_id, remark, add_id, modify_id, language, modification_time, add_time from t_group_members
+    </sql>
+
+    <select id="selectTGroupMembersList" parameterType="TGroupMembers" resultMap="TGroupMembersResult">
+        <include refid="selectTGroupMembersVo"/>
+        <where>  
+            <if test="groupId != null "> and group_id = #{groupId}</if>
+            <if test="user != null "> and user = #{user}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="visaStatus != null "> and visa_status = #{visaStatus}</if>
+            <if test="gender != null "> and gender = #{gender}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="physicalConditionId != null  and physicalConditionId != ''"> and physical_condition_id = #{physicalConditionId}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTGroupMembersById" parameterType="Long" resultMap="TGroupMembersResult">
+        <include refid="selectTGroupMembersVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTGroupMembers" parameterType="TGroupMembers" useGeneratedKeys="true" keyProperty="id">
+        insert into t_group_members
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null ">group_id,</if>
+            <if test="user != null ">user,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="tel != null  and tel != ''">tel,</if>
+            <if test="visaStatus != null ">visa_status,</if>
+            <if test="gender != null ">gender,</if>
+            <if test="birthday != null ">birthday,</if>
+            <if test="physicalConditionId != null  and physicalConditionId != ''">physical_condition_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="language != null ">language,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null ">#{groupId},</if>
+            <if test="user != null ">#{user},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="tel != null  and tel != ''">#{tel},</if>
+            <if test="visaStatus != null ">#{visaStatus},</if>
+            <if test="gender != null ">#{gender},</if>
+            <if test="birthday != null ">#{birthday},</if>
+            <if test="physicalConditionId != null  and physicalConditionId != ''">#{physicalConditionId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTGroupMembers" parameterType="TGroupMembers">
+        update t_group_members
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="groupId != null ">group_id = #{groupId},</if>
+            <if test="user != null ">user = #{user},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="tel != null  and tel != ''">tel = #{tel},</if>
+            <if test="visaStatus != null ">visa_status = #{visaStatus},</if>
+            <if test="gender != null ">gender = #{gender},</if>
+            <if test="birthday != null ">birthday = #{birthday},</if>
+            <if test="physicalConditionId != null  and physicalConditionId != ''">physical_condition_id = #{physicalConditionId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTGroupMembersById" parameterType="Long">
+        delete from t_group_members where id = #{id}
+    </delete>
+
+    <delete id="deleteTGroupMembersByIds" parameterType="String">
+        delete from t_group_members where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TDriverMapper">
+    
+    <resultMap type="TDriver" id="TDriverResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="tel"    column="tel"    />
+        <result property="groupId"    column="group_id"    />
+        <result property="language"    column="language"    />
+        <result property="addId"    column="add_id"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTDriverVo">
+        select id, name, gender, tel, group_id, language, add_id, modify_id, license_plate_number, modification_time, add_time from t_driver
+    </sql>
+
+    <select id="selectTDriverList" parameterType="TDriver" resultMap="TDriverResult">
+        <include refid="selectTDriverVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="groupId != null "> and group_id = #{groupId}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number = #{licensePlateNumber}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTDriverById" parameterType="Long" resultMap="TDriverResult">
+        <include refid="selectTDriverVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTDriver" parameterType="TDriver" useGeneratedKeys="true" keyProperty="id">
+        insert into t_driver
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="tel != null  and tel != ''">tel,</if>
+            <if test="groupId != null ">group_id,</if>
+            <if test="language != null ">language,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''">license_plate_number,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="tel != null  and tel != ''">#{tel},</if>
+            <if test="groupId != null ">#{groupId},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''">#{licensePlateNumber},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTDriver" parameterType="TDriver">
+        update t_driver
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="tel != null  and tel != ''">tel = #{tel},</if>
+            <if test="groupId != null ">group_id = #{groupId},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''">license_plate_number = #{licensePlateNumber},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTDriverById" parameterType="Long">
+        delete from t_driver where id = #{id}
+    </delete>
+
+    <delete id="deleteTDriverByIds" parameterType="String">
+        delete from t_driver where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

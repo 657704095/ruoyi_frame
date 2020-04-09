@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TPilgrimageInformationMapper">
+    
+    <resultMap type="TPilgrimageInformation" id="TPilgrimageInformationResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="img"    column="img"    />
+        <result property="intro"    column="intro"    />
+        <result property="html"    column="html"    />
+        <result property="price"    column="price"    />
+        <result property="addId"    column="add_id"    />
+        <result property="order"    column="order"    />
+        <result property="language"    column="language"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+        <result property="tableType"    column="table_type"    />
+    </resultMap>
+
+    <sql id="selectTPilgrimageInformationVo">
+        select id, title, img, intro, html, price, add_id, order, language, modify_id, modification_time, add_time, table_type from t_pilgrimage_information
+    </sql>
+
+    <select id="selectTPilgrimageInformationList" parameterType="TPilgrimageInformation" resultMap="TPilgrimageInformationResult">
+        <include refid="selectTPilgrimageInformationVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="intro != null  and intro != ''"> and intro = #{intro}</if>
+            <if test="html != null  and html != ''"> and html = #{html}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="order != null "> and order = #{order}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+            <if test="tableType != null "> and table_type = #{tableType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPilgrimageInformationById" parameterType="Long" resultMap="TPilgrimageInformationResult">
+        <include refid="selectTPilgrimageInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTPilgrimageInformation" parameterType="TPilgrimageInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pilgrimage_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null  and title != ''">title,</if>
+            <if test="img != null  and img != ''">img,</if>
+            <if test="intro != null  and intro != ''">intro,</if>
+            <if test="html != null  and html != ''">html,</if>
+            <if test="price != null ">price,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="order != null ">order,</if>
+            <if test="language != null ">language,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+            <if test="tableType != null ">table_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="img != null  and img != ''">#{img},</if>
+            <if test="intro != null  and intro != ''">#{intro},</if>
+            <if test="html != null  and html != ''">#{html},</if>
+            <if test="price != null ">#{price},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="order != null ">#{order},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+            <if test="tableType != null ">#{tableType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPilgrimageInformation" parameterType="TPilgrimageInformation">
+        update t_pilgrimage_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="img != null  and img != ''">img = #{img},</if>
+            <if test="intro != null  and intro != ''">intro = #{intro},</if>
+            <if test="html != null  and html != ''">html = #{html},</if>
+            <if test="price != null ">price = #{price},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="order != null ">order = #{order},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+            <if test="tableType != null ">table_type = #{tableType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPilgrimageInformationById" parameterType="Long">
+        delete from t_pilgrimage_information where id = #{id}
+    </delete>
+
+    <delete id="deleteTPilgrimageInformationByIds" parameterType="String">
+        delete from t_pilgrimage_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

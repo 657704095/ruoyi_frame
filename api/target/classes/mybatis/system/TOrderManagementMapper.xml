@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TOrderManagementMapper">
+    
+    <resultMap type="TOrderManagement" id="TOrderManagementResult">
+        <result property="id"    column="id"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="submitEvent"    column="submit_event"    />
+        <result property="orderPrice"    column="order_price"    />
+        <result property="waybillPrice"    column="waybill_price"    />
+        <result property="logisticsNumber"    column="logistics_number"    />
+        <result property="userId"    column="user_id"    />
+        <result property="harvestAddressProvince"    column="harvest_address_province"    />
+        <result property="harvestAddressCity"    column="harvest_address_city"    />
+        <result property="harvestAddressCounty"    column="harvest_address_county"    />
+        <result property="harvestAddressStreetOrTown"    column="harvest_address_street_or_town"    />
+        <result property="orderState"    column="order_state"    />
+        <result property="shippingStatus"    column="shipping_status"    />
+        <result property="modePayment"    column="mode_payment"    />
+        <result property="language"    column="language"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+    </resultMap>
+
+    <sql id="selectTOrderManagementVo">
+        select id, order_number, submit_event, order_price, waybill_price, logistics_number, user_id, harvest_address_province, harvest_address_city, harvest_address_county, harvest_address_street_or_town, order_state, shipping_status, mode_payment, language, modification_time, add_time from t_order_management
+    </sql>
+
+    <select id="selectTOrderManagementList" parameterType="TOrderManagement" resultMap="TOrderManagementResult">
+        <include refid="selectTOrderManagementVo"/>
+        <where>  
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+            <if test="submitEvent != null "> and submit_event = #{submitEvent}</if>
+            <if test="orderPrice != null "> and order_price = #{orderPrice}</if>
+            <if test="waybillPrice != null "> and waybill_price = #{waybillPrice}</if>
+            <if test="logisticsNumber != null  and logisticsNumber != ''"> and logistics_number = #{logisticsNumber}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="harvestAddressProvince != null  and harvestAddressProvince != ''"> and harvest_address_province = #{harvestAddressProvince}</if>
+            <if test="harvestAddressCity != null  and harvestAddressCity != ''"> and harvest_address_city = #{harvestAddressCity}</if>
+            <if test="harvestAddressCounty != null  and harvestAddressCounty != ''"> and harvest_address_county = #{harvestAddressCounty}</if>
+            <if test="harvestAddressStreetOrTown != null  and harvestAddressStreetOrTown != ''"> and harvest_address_street_or_town = #{harvestAddressStreetOrTown}</if>
+            <if test="orderState != null "> and order_state = #{orderState}</if>
+            <if test="shippingStatus != null "> and shipping_status = #{shippingStatus}</if>
+            <if test="modePayment != null "> and mode_payment = #{modePayment}</if>
+            <if test="language != null "> and language = #{language}</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTOrderManagementById" parameterType="Long" resultMap="TOrderManagementResult">
+        <include refid="selectTOrderManagementVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTOrderManagement" parameterType="TOrderManagement" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_management
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNumber != null  and orderNumber != ''">order_number,</if>
+            <if test="submitEvent != null ">submit_event,</if>
+            <if test="orderPrice != null ">order_price,</if>
+            <if test="waybillPrice != null ">waybill_price,</if>
+            <if test="logisticsNumber != null  and logisticsNumber != ''">logistics_number,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="harvestAddressProvince != null  and harvestAddressProvince != ''">harvest_address_province,</if>
+            <if test="harvestAddressCity != null  and harvestAddressCity != ''">harvest_address_city,</if>
+            <if test="harvestAddressCounty != null  and harvestAddressCounty != ''">harvest_address_county,</if>
+            <if test="harvestAddressStreetOrTown != null  and harvestAddressStreetOrTown != ''">harvest_address_street_or_town,</if>
+            <if test="orderState != null ">order_state,</if>
+            <if test="shippingStatus != null ">shipping_status,</if>
+            <if test="modePayment != null ">mode_payment,</if>
+            <if test="language != null ">language,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNumber != null  and orderNumber != ''">#{orderNumber},</if>
+            <if test="submitEvent != null ">#{submitEvent},</if>
+            <if test="orderPrice != null ">#{orderPrice},</if>
+            <if test="waybillPrice != null ">#{waybillPrice},</if>
+            <if test="logisticsNumber != null  and logisticsNumber != ''">#{logisticsNumber},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="harvestAddressProvince != null  and harvestAddressProvince != ''">#{harvestAddressProvince},</if>
+            <if test="harvestAddressCity != null  and harvestAddressCity != ''">#{harvestAddressCity},</if>
+            <if test="harvestAddressCounty != null  and harvestAddressCounty != ''">#{harvestAddressCounty},</if>
+            <if test="harvestAddressStreetOrTown != null  and harvestAddressStreetOrTown != ''">#{harvestAddressStreetOrTown},</if>
+            <if test="orderState != null ">#{orderState},</if>
+            <if test="shippingStatus != null ">#{shippingStatus},</if>
+            <if test="modePayment != null ">#{modePayment},</if>
+            <if test="language != null ">#{language},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTOrderManagement" parameterType="TOrderManagement">
+        update t_order_management
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNumber != null  and orderNumber != ''">order_number = #{orderNumber},</if>
+            <if test="submitEvent != null ">submit_event = #{submitEvent},</if>
+            <if test="orderPrice != null ">order_price = #{orderPrice},</if>
+            <if test="waybillPrice != null ">waybill_price = #{waybillPrice},</if>
+            <if test="logisticsNumber != null  and logisticsNumber != ''">logistics_number = #{logisticsNumber},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="harvestAddressProvince != null  and harvestAddressProvince != ''">harvest_address_province = #{harvestAddressProvince},</if>
+            <if test="harvestAddressCity != null  and harvestAddressCity != ''">harvest_address_city = #{harvestAddressCity},</if>
+            <if test="harvestAddressCounty != null  and harvestAddressCounty != ''">harvest_address_county = #{harvestAddressCounty},</if>
+            <if test="harvestAddressStreetOrTown != null  and harvestAddressStreetOrTown != ''">harvest_address_street_or_town = #{harvestAddressStreetOrTown},</if>
+            <if test="orderState != null ">order_state = #{orderState},</if>
+            <if test="shippingStatus != null ">shipping_status = #{shippingStatus},</if>
+            <if test="modePayment != null ">mode_payment = #{modePayment},</if>
+            <if test="language != null ">language = #{language},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTOrderManagementById" parameterType="Long">
+        delete from t_order_management where id = #{id}
+    </delete>
+
+    <delete id="deleteTOrderManagementByIds" parameterType="String">
+        delete from t_order_management where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

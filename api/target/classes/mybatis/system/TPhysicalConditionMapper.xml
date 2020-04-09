@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.project.system.mapper.TPhysicalConditionMapper">
+    
+    <resultMap type="TPhysicalCondition" id="TPhysicalConditionResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="modificationTime"    column="modification_time"    />
+        <result property="addTime"    column="add_time"    />
+        <result property="modifyId"    column="modify_id"    />
+        <result property="addId"    column="add_id"    />
+        <result property="language"    column="language"    />
+    </resultMap>
+
+    <sql id="selectTPhysicalConditionVo">
+        select id, name, modification_time, add_time, modify_id, add_id, language from t_physical_condition
+    </sql>
+
+    <select id="selectTPhysicalConditionList" parameterType="TPhysicalCondition" resultMap="TPhysicalConditionResult">
+        <include refid="selectTPhysicalConditionVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="modificationTime != null "> and modification_time = #{modificationTime}</if>
+            <if test="addTime != null "> and add_time = #{addTime}</if>
+            <if test="modifyId != null "> and modify_id = #{modifyId}</if>
+            <if test="addId != null "> and add_id = #{addId}</if>
+            <if test="language != null "> and language = #{language}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPhysicalConditionById" parameterType="Long" resultMap="TPhysicalConditionResult">
+        <include refid="selectTPhysicalConditionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTPhysicalCondition" parameterType="TPhysicalCondition" useGeneratedKeys="true" keyProperty="id">
+        insert into t_physical_condition
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="modificationTime != null ">modification_time,</if>
+            <if test="addTime != null ">add_time,</if>
+            <if test="modifyId != null ">modify_id,</if>
+            <if test="addId != null ">add_id,</if>
+            <if test="language != null ">language,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="modificationTime != null ">#{modificationTime},</if>
+            <if test="addTime != null ">#{addTime},</if>
+            <if test="modifyId != null ">#{modifyId},</if>
+            <if test="addId != null ">#{addId},</if>
+            <if test="language != null ">#{language},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPhysicalCondition" parameterType="TPhysicalCondition">
+        update t_physical_condition
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="modificationTime != null ">modification_time = #{modificationTime},</if>
+            <if test="addTime != null ">add_time = #{addTime},</if>
+            <if test="modifyId != null ">modify_id = #{modifyId},</if>
+            <if test="addId != null ">add_id = #{addId},</if>
+            <if test="language != null ">language = #{language},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPhysicalConditionById" parameterType="Long">
+        delete from t_physical_condition where id = #{id}
+    </delete>
+
+    <delete id="deleteTPhysicalConditionByIds" parameterType="String">
+        delete from t_physical_condition where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
